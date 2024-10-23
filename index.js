@@ -29,9 +29,11 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 
 
-const convertOggToMp3 = (inputPath, outputPath) => {
+const convertOggToMp3 = async (inputPath, outputPath) => {
+    try {
+
     
-    return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
         ffmpeg(inputPath)
             .toFormat('mp3')
             .on('end', () => {
@@ -49,10 +51,11 @@ const convertOggToMp3 = (inputPath, outputPath) => {
                 console.error('Ошибка при конвертации:', err);
                 reject(err);
             })
-            .save(outputPath);
-            
-    
-    });
+            .save(outputPath);  
+     });
+    } catch (err) {
+        console.error('Ошибка конв:', err);
+    }
 };
 
 
